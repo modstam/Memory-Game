@@ -2,7 +2,7 @@
 This is a simple memory game. The game will show different color schemes to different players and send data to a database in order to show that color will affect short term memory.
 <br>
 
-<b> Project members </b>
+<b> Project members </b> <br>
 Andreas Stjerndal <br>
 Måns Odstam <br>
 Luthon Hagvinprice <br>
