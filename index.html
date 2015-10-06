@@ -136,7 +136,7 @@
             </script>
 
 
-
+</section>
 
             <script> 
         <!-- This section will fetch data from the open database hosted on firebase >
@@ -155,7 +155,7 @@
 
     nonSyncedRef.orderByChild("time").on("child_added", function (snapshot) {
 
-        $("#non-synced1").text((parseFloat($("#non-synced1").text()) + 1).toFixed(1));
+        $("#non-synced1").text((parseFloat($("#non-synced1").text()) + 1));
         $("#non-synced2").text((parseFloat($("#non-synced2").text()) + parseFloat(snapshot.val().time)).toFixed(1));
         $("#non-synced3").text((parseFloat($("#non-synced2").text()) / parseFloat($("#non-synced1").text())).toFixed(1));
         $("#non-synced4").text((parseFloat($("#non-synced4").text()) + parseFloat(snapshot.val().tries)).toFixed(1));
@@ -173,7 +173,7 @@
     syncedRef.orderByChild("time").on("child_added", function (snapshot) {
 
 
-        $("#synced1").text((parseFloat($("#synced1").text()) + 1).toFixed(1));
+        $("#synced1").text((parseFloat($("#synced1").text()) + 1));
         $("#synced2").text((parseFloat($("#synced2").text()) + parseFloat(snapshot.val().time)).toFixed(1));
         $("#synced3").text((parseFloat($("#synced2").text()) / parseFloat($("#synced1").text())).toFixed(1));
         $("#synced4").text((parseFloat($("#synced4").text()) + parseFloat(snapshot.val().tries)).toFixed(1));
@@ -195,7 +195,7 @@
 
 
 
-            <footer>
+            <footer >
                 <p>This project is maintained by <a href="https://github.com/modstam">modstam</a></p>
                 <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
             </footer>
