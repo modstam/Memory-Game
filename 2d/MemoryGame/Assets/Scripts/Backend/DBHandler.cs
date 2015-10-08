@@ -82,12 +82,12 @@ public class DBHandler
 
         if (colorSynced)
         {
-           WWW www = new WWW(sessionsColorSyncURL, body, headers);
+           WWW www = new WWW(sessionsColorSyncURL, body);
 
         }
         else
         {
-           WWW www = new WWW(sessionsNonColorSyncURL, body, headers);
+           WWW www = new WWW(sessionsNonColorSyncURL, body);
 
         }
         
