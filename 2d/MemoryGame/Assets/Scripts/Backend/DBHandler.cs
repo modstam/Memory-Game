@@ -72,7 +72,12 @@ public class DBHandler
         byte[] body = Encoding.UTF8.GetBytes(jsonString);
         Dictionary<string,string> headers = new Dictionary<string, string>();
         headers.Add("Content-Type", "application/json");
-        headers.Add("Connection", "close"); 
+        headers.Add("Connection", "close");
+
+        headers.Add("Access-Control-Allow-Credentials", "true");
+        headers.Add("Access-Control-Allow-Headers", "Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time");
+        headers.Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+        headers.Add("Access-Control-Allow-Origin", "*");
 
 
         if (colorSynced)
