@@ -3,6 +3,7 @@ using System.Collections;
 using System.Net;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
 
 public class DBHandler
 {
@@ -62,28 +63,36 @@ public class DBHandler
 **/
     public void addSessionWWW(int tries, float time, bool colorSynced)
     {
-        WWW www;
 
-        Hashtable session = new Hashtable();
-        session.Add("time", time);
-        session.Add("tries", tries);
+       
 
-        Stream byteStream = new MemoryStream(Encoding.UTF8.GetBytes(JSON.JsonEncode(session)));
-        byte[] array = ReadFully(byteStream);
+
+        string jsonString = "{\"session\": [{\"time\":\"" + time + "\", \"tries\":\"" + tries + "\"}]}";
+
+        byte[] body = Encoding.UTF8.GetBytes(jsonString);
+        Dictionary<string,string> headers = new Dictionary<string, string>();
+        headers.Add("Content-Type", "application/json");
+        headers.Add("Connection", "close"); 
+
 
         if (colorSynced)
         {
-            www = new WWW(sessionsColorSyncURL, array);
+           WWW www = new WWW(sessionsColorSyncURL, body, headers);
+
         }
         else
         {
-            www = new WWW(sessionsNonColorSyncURL, array);
+           WWW www = new WWW(sessionsNonColorSyncURL, body, headers);
+
         }
-        www.Dispose();
-        www = null;
-        byteStream.Close();
-        byteStream.Dispose();
-        byteStream = null;
+        
+               
+        
+        
+        //byteStream.Close();
+        //byteStream.Dispose();
+        //byteStream = null;
+    
 
     }
 

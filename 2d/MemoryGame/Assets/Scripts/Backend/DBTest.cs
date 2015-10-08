@@ -16,7 +16,6 @@ public class DBTest : MonoBehaviour {
 	}
 
     public void TestDB() {
-        Debug.Log("Sending to db");
-        db.addSessionWWW(10, 20f, true);
+       db.addSessionWWW(10, 20f, true);
     }
 }
