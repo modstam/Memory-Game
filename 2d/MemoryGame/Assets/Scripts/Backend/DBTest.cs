@@ -16,7 +16,6 @@ public class DBTest : MonoBehaviour {
 	}
 
     public void TestDB() {
-        
         db.addSessionWWW(10, 20f, true);
     }
 }
