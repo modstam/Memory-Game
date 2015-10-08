@@ -6,10 +6,10 @@ public class DBTest : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        db = new DBHandler();
-        db.addSession(10, 20, true);
+        //db = new DBHandler();
+        db = GetComponent<DBHandler>();
     }
-	
+
 	// Update is called once per frame
 	void Update () {
 	
@@ -17,6 +17,6 @@ public class DBTest : MonoBehaviour {
 
     public void TestDB() {
         
-       
+        db.addSessionWWW(10, 20f, true);
     }
 }

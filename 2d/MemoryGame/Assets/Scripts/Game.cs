@@ -70,7 +70,7 @@ public class Game : MonoBehaviour {
         playing = false;
 
         //SEND CLICKS AND TIMER TO DATABASE
-        dbHandler.addSession(clicks, timer, normalMode);
+        dbHandler.addSessionWWW(clicks, timer, normalMode);
 
         normalMode = !normalMode; //Change game mode for next game
         startGameButton.SetActive(true);

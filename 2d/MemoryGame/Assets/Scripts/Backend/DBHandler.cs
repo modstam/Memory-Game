@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Net;
+using System.IO;
+using System.Text;
 
 public class DBHandler : MonoBehaviour
 {
@@ -27,9 +29,10 @@ public class DBHandler : MonoBehaviour
         }
 
     }
-
+/**
     public bool addSession(int tries, float time, bool colorSynced)
     {
+
         Hashtable session = new Hashtable();
         session.Add("time", time);
         session.Add("tries", tries);
@@ -59,24 +62,72 @@ public class DBHandler : MonoBehaviour
             Hashtable jsonObj = (Hashtable)JSON.JsonDecode(callback.response.Text);
             if (jsonObj == null)
             {
-                Debug.LogError("server returned null or malformed response ):");
-            }
+                    // Debug.LogError("server returned null or malformed response ):");
+                }
             if (DEBUG)
             {
                 foreach (var callBackObject in jsonObj)
                 {
-                    Debug.Log(callBackObject.ToString());
-                }
+                        // Debug.Log(callBackObject.ToString());
+                    }
             }
 
         });
+
+
         return true;
+    }
+
+**/
+    public void addSessionWWW(int tries, float time, bool colorSynced)
+    {
+        WWW www;
+
+        Hashtable session = new Hashtable();
+        session.Add("time", time);
+        session.Add("tries", tries);
+
+        string sessionsURL;
+        Stream byteStream = new MemoryStream(Encoding.UTF8.GetBytes(JSON.JsonEncode(session)));
+        byte[] array = ReadFully(byteStream);
+
+        if (colorSynced)
+        {
+            www = new WWW(sessionsColorSyncURL, array);
+            sessionsURL = sessionsColorSyncURL;
+        }
+        else
+        {
+            www = new WWW(sessionsNonColorSyncURL, array);
+            sessionsURL = sessionsNonColorSyncURL;
+        }
+        www.Dispose();
+        www = null;
+        byteStream.Close();
+        byteStream.Dispose();
+        byteStream = null;
+
     }
 
     private void testDBConnection()
     {
 
-        addSession(1337, 1337f, true);
-        addSession(1338, 1338f, false);
+        addSessionWWW(1337, 1337f, true);
+        addSessionWWW(1338, 1338f, false);
+    }
+
+
+    public static byte[] ReadFully( Stream input)
+    {
+        byte[] buffer = new byte[16 * 1024];
+        using (MemoryStream ms = new MemoryStream())
+        {
+            int read;
+            while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+            {
+                ms.Write(buffer, 0, read);
+            }
+            return ms.ToArray();
+        }
     }
 }
