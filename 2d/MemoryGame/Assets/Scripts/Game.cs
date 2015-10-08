@@ -22,7 +22,7 @@ public class Game : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //GenerateBoard(normalSprites.Count);
-        dbHandler = new DBHandler();
+        dbHandler = new DBHandler();    
 
 	}
 	

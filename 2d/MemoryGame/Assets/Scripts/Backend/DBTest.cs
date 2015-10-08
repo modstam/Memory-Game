@@ -7,7 +7,7 @@ public class DBTest : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //db = new DBHandler();
-        db = GetComponent<DBHandler>();
+        db = new DBHandler();
     }
 
 	// Update is called once per frame

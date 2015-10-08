@@ -4,31 +4,12 @@ using System.Net;
 using System.IO;
 using System.Text;
 
-public class DBHandler : MonoBehaviour
+public class DBHandler
 {
 
     private string sessionsColorSyncURL = "https://blazing-inferno-8421.firebaseio.com/sessions/colorSyncedSessions.json";
     private string sessionsNonColorSyncURL = "https://blazing-inferno-8421.firebaseio.com/sessions/NonColorSyncedSessions.json";
 
-    public bool DEBUG = false;
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        if (DEBUG)
-        {
-            //Test DB once
-            testDBConnection();
-            DEBUG = false;
-        }
-
-    }
 /**
     public bool addSession(int tries, float time, bool colorSynced)
     {
@@ -87,19 +68,16 @@ public class DBHandler : MonoBehaviour
         session.Add("time", time);
         session.Add("tries", tries);
 
-        string sessionsURL;
         Stream byteStream = new MemoryStream(Encoding.UTF8.GetBytes(JSON.JsonEncode(session)));
         byte[] array = ReadFully(byteStream);
 
         if (colorSynced)
         {
             www = new WWW(sessionsColorSyncURL, array);
-            sessionsURL = sessionsColorSyncURL;
         }
         else
         {
             www = new WWW(sessionsNonColorSyncURL, array);
-            sessionsURL = sessionsNonColorSyncURL;
         }
         www.Dispose();
         www = null;
