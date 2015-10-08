@@ -17,10 +17,12 @@ public class Game : MonoBehaviour {
     bool playing = false;
 
     float timer = 0;
+    DBHandler dbHandler;
 
 	// Use this for initialization
 	void Start () {
         //GenerateBoard(normalSprites.Count);
+        dbHandler = new DBHandler();
 
 	}
 	
@@ -68,6 +70,7 @@ public class Game : MonoBehaviour {
         playing = false;
 
         //SEND CLICKS AND TIMER TO DATABASE
+        dbHandler.addSession(clicks, timer, normalMode);
 
         normalMode = !normalMode; //Change game mode for next game
         startGameButton.SetActive(true);
