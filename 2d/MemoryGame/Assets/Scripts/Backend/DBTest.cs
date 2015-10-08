@@ -7,7 +7,7 @@ public class DBTest : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         db = new DBHandler();
-
+        db.addSession(10, 20, true);
     }
 	
 	// Update is called once per frame
@@ -17,6 +17,6 @@ public class DBTest : MonoBehaviour {
 
     public void TestDB() {
         
-        db.addSession(10, 20, true);
+       
     }
 }
