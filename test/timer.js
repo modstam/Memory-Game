@@ -1,5 +1,6 @@
 var sec = 0;
 var timer;
+var tries = 0;
 var running = false;
 var normalMode = true; //The mode not to start in :)
 
@@ -26,6 +27,7 @@ function startGame() {
 function stopGame() {
     clearInterval(timer);
     running = false;
+    addSession(sec, tries, normalMode);
     startbtn.style.visibility = "visible";
 }
 
@@ -75,6 +77,7 @@ function validateCards(){
         }
         return true; //found a pair
     }
+    tries++;
     return false; //did not find pair
 }
 
