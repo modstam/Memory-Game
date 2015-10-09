@@ -1,7 +1,7 @@
 var sec = 0;
 var timer;
 var running = false;
-var harmonyMode = true; //The mode not to start in :)
+var harmonyMode = Math.random() >= 0.5; //The mode not to start in :)
 
 function pad(val) {
     return val > 9 ? val : "0" + val;
@@ -16,7 +16,7 @@ function startGame() {
     running = true;
     document.getElementById("seconds").innerHTML = pad(0);
     document.getElementById("minutes").innerHTML = pad(0);
-
+    
     timer = setInterval(function () {
         document.getElementById("seconds").innerHTML = pad(++sec % 60);
         document.getElementById("minutes").innerHTML = pad(parseInt(sec / 60, 10));
