@@ -95,19 +95,19 @@ var cards = new Array();
 function generate()
 {
 
-    images[0] = "../Img/bull.jpg";
-    images[1] = "../Img/camel.jpg";
-    images[2] = "../Img/cat.jpg";
-    images[3] = "../Img/hippo.jpg";
-    images[4] = "../Img/croc.jpg";
-    images[5] = "../Img/dog.jpg";
-    images[6] = "../Img/lion.jpg";
-    images[7] = "../Img/monkey.jpg";
-    images[8] = "../Img/pig.jpg";
-    images[9] = "../Img/rabbit.jpg";
-    images[10] = "../Img/sheep.jpg";
-    images[11] = "../Img/turtle.jpg";
-    images[12] = "../Img/mouse.jpg";
+    images[0] = "/Img/bull.jpg";
+    images[1] = "/Img/camel.jpg";
+    images[2] = "/Img/cat.jpg";
+    images[3] = "/Img/hippo.jpg";
+    images[4] = "/Img/croc.jpg";
+    images[5] = "/Img/dog.jpg";
+    images[6] = "/Img/lion.jpg";
+    images[7] = "/Img/monkey.jpg";
+    images[8] = "/Img/pig.jpg";
+    images[9] = "/Img/rabbit.jpg";
+    images[10] = "/Img/sheep.jpg";
+    images[11] = "/Img/turtle.jpg";
+    images[12] = "/Img/mouse.jpg";
 
     var i;
     for(i=0;i<24;i++) {
