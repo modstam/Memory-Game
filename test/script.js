@@ -1,7 +1,7 @@
 var sec = 0;
 var timer;
 var running = false;
-var normalMode = true; //The mode not to start in :)
+var harmonyMode = true; //The mode not to start in :)
 
 function pad(val) {
     return val > 9 ? val : "0" + val;
@@ -26,7 +26,7 @@ function startGame() {
 function stopGame() {
     clearInterval(timer);
     running = false;
-    console.log("Tries: " + tries + ", time: " + sec);
+    console.log("Harmony: " + harmonyMode + "Tries: " + tries + ", time: " + sec );
     startbtn.style.visibility = "visible";
 }
 
@@ -38,7 +38,7 @@ function cardClick(element, index)
         if(tmp=="card"){ //Is the backside of the card visible?
             //set the src of the card to the image corresponding to this cards id.
             element.setAttribute("src", images[cards[index].identifier]);
-            if(normalMode) {
+            if(harmonyMode) {
                 element.setAttribute("class", "show");
             } else { //else use alternate colors
                 element.setAttribute("class", "show");
@@ -133,5 +133,5 @@ function resetGame()
     images = new Array();
     cards = new Array();
     generate();
-    normalMode = !normalMode;
+    harmonyMode = !harmonyMode;
 }
