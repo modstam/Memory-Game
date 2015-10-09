@@ -1,13 +1,20 @@
-function addSession(time, tries, isColorSynced){
+function addSession(time, tries, isColorSynced) {
+
 
     if (isColorSynced) {
         var syncedRef = new Firebase("https://blazing-inferno-8421.firebaseio.com/sessions/colorSyncedSessions");
-        syncedRef.push({ "time": time, "tries": tries });
-
+        syncedRef.push({ "time": time, "tries": tries }, error);    
     }
     else {
         var nonSyncedRef = new Firebase("https://blazing-inferno-8421.firebaseio.com/sessions/NonColorSyncedSessions");
-        nonSyncedRef.push({ "time": time, "tries": tries });
-    }	
+        nonSyncedRef.push({ "time": time, "tries": tries }, error);
+           
+    }
+
+    function error(err) {
+        if (error) {
+            console.log("Write Error: " + err);
+        }
+    }
 
 }
