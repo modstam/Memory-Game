@@ -41,7 +41,7 @@ function cardClick(element, index)
             if(harmonyMode) {
                 element.setAttribute("class", "show");
             } else { //else use alternate colors
-                element.setAttribute("class", "show");
+                element.setAttribute("class", "show huerotate");
             }
             cards[index].index = index;
             selectedCards[selectedCards.length] = cards[index];
