@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body onload="generate()">
+	<center>
+		<h1>Laboration 3: DHTML</h1>
+
+		<p>Memory</p>
+		<table width = "268" height = "400">
+			<tr>
+				<td>
+					<img src="" class="card" id="0" onclick="cardClick(this, 0)">
+				</td>
+				<td >
+					<img src="" class="card" id="1" onclick="cardClick(this, 1)">
+				</td>
+				<td>
+					<img src="" class="card" id="2" onclick="cardClick(this, 2)">
+				</td>
+				<td>
+					<img src="" class="card" id="3" onclick="cardClick(this, 3)">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img src="" class="card" id="4" onclick="cardClick(this, 4)">
+				</td>
+				<td>
+					<img src="" class="card" id="5" onclick="cardClick(this, 5)">
+				</td>
+				<td>
+					<img src="" class="card" id="6" onclick="cardClick(this, 6)">
+				</td>
+				<td>
+					<img src="" class="card" id="7" onclick="cardClick(this, 7)">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img src="" class="card" id="8" onclick="cardClick(this, 8)">
+				</td>
+				<td>
+					<img src="" class="card" id="9" onclick="cardClick(this, 9)">
+				</td>
+				<td>
+					<img src="" class="card" id="10" onclick="cardClick(this, 10)">
+				</td>
+				<td>
+					<img src="" class="card" id="11" onclick="cardClick(this, 11)">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img src="" class="card" id="12" onclick="cardClick(this, 12)">
+				</td>
+				<td>
+					<img src="" class="card" id="13" onclick="cardClick(this, 13)">
+				</td>
+				<td>
+					<img src="" class="card" id="14" onclick="cardClick(this, 14)">
+				</td>
+				<td>
+					<img src="" class="card" id="15" onclick="cardClick(this, 15)">
+				</td>
+			</tr>
+		</table>
+
+		<table>
+			<tr>
+				<td>
+					Player 1
+				</td>
+
+				<td>
+					Player 2
+				</td>
+			</tr>
+			<tr>
+				<td id="player1" style="text-align:center">
+					0
+				</td>
+				<td id="player2" style="text-align:center">
+					0
+				</td>
+			</tr>
+			<p id="turn">
+				Turn: Player 1
+			</p>
+
+
+			<script>
+
+				function cardClick(element, index)
+				{	
+
+					var tmp = element.getAttribute("class");
+
+	if(tmp=="card"){ //Is the backside of the card visible?
+		//get a picture
+		element.setAttribute("src", images[cards[index].identifier]);
+		element.setAttribute("class", "show");
+		cards[index].index = index;
+		selectedCards[selectedCards.length] = cards[index];
+		if(selectedCards.length == 2){
+			pair = validateCards();
+
+		}
+
+		else if(selectedCards.length == 3){
+			if(!pair){
+				resetCards();
+				selectedCards = new Array();
+
+				if(turn == 1){
+					turn = 2;
+					document.getElementById("turn").innerHTML = "Turn: Player 2";
+				}else{
+					turn = 1;
+					document.getElementById("turn").innerHTML = "Turn: Player 1";
+				}
+				return false;
+			}
+			else{
+				selectedCards = new Array();
+				selectedCards[0] = cards[index];	
+				pair= false;
+			}
+
+
+
+		}
+
+	}
+
+	document.getElementById("player1").innerHTML = p1score;
+	document.getElementById("player2").innerHTML = p2score;
+
+}
+
+function validateCards(){
+	if(selectedCards[0].identifier == selectedCards[1].identifier){
+		if(turn==1){
+			p1score++;
+			document.getElementById("player1").innerHTML = p1score;
+		}else{
+			p2score++;
+			document.getElementById("player2").innerHTML = p2score;
+		}
+		return true;
+	}else{
+		
+	}
+
+	return false;
+}
+
+function resetCards(){
+	for(var i = 0; i < selectedCards.length; i++){
+		document.getElementById(selectedCards[i].index).setAttribute("src", "");
+		document.getElementById(selectedCards[i].index).setAttribute("class", "card");
+	}
+
+	
+}
+
+
+</script>
+
+<script>
+	var pair = false;
+	var turn = 1;
+	var p1score = 0;
+	var p2score = 0;
+	var selectedCards = new Array();
+	var images = new Array();
+	var cards = new Array();
+	function generate()
+	{
+
+		images[0] = "one.jpg";
+		images[1] = "two.jpg";
+		images[2] = "three.jpg";
+		images[3] = "four.jpg";
+		images[4] = "five.jpg";
+		images[5] = "six.jpg";
+		images[6] = "seven.jpg";
+		images[7] = "eight.jpg";
+
+		var i;
+		for(i=0;i<16;i++) {
+			cards[i] = new Object();
+			cards[i].order = Math.random();
+			cards[i].identifier = Math.floor(i/2);
+		}
+		cards.sort(function(a,b){return a.order - b.order});
+
+	}
+</script>
+
+</center>
+</body>
+</html>
