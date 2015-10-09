@@ -26,6 +26,7 @@ function startGame() {
 function stopGame() {
     clearInterval(timer);
     running = false;
+    console.log("Tries: " + tries + ", time: " + sec);
     startbtn.style.visibility = "visible";
 }
 
@@ -40,7 +41,7 @@ function cardClick(element, index)
             if(normalMode) {
                 element.setAttribute("class", "show");
             } else { //else use alternate colors
-                element.setAttribute("class", "show saturate invert");
+                element.setAttribute("class", "show");
             }
             cards[index].index = index;
             selectedCards[selectedCards.length] = cards[index];
