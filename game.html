@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Memory-game by modstam</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+
+            <p class="view"><a href="https://github.com/modstam/Memory-Game">View the Project on GitHub <small>modstam/Memory-Game</small></a></p>
+
+
+            <ul>
+                <li><a href="https://github.com/modstam/Memory-Game/zipball/master">Download <strong>ZIP File</strong></a></li>
+                <li><a href="https://github.com/modstam/Memory-Game/tarball/master">Download <strong>TAR Ball</strong></a></li>
+                <li><a href="https://github.com/modstam/Memory-Game">View On <strong>GitHub</strong></a></li>
+            </ul>
+        </header>
+        <section>
+            <h1>
+                <a id="memory-game" class="anchor" href="#memory-game" aria-hidden="true"><span class="octicon octicon-link"></span></a>Memory-Game</h1>
+
+            <p>
+                This is a simple memory game. The game will show different color schemes to different players and send data to a database in order to show that color will affect short term memory.
+            <br>
+            </p>
+
+            <p>
+                <b>Project members </b>
+                <br>
+                Andreas Stjerndal
+                <br>
+                Måns Odstam
+                <br>
+                Luthon Hagvinprice
+                <br>
+                Yiming Fan
+                <br>
+                <br>
+            </p>
+
+            <p>
+                The game is implemented in <a href="https://unity3d.com/get-unity">Unity3d </a>
+                <br>
+            </p>
+
+            <p>
+                To open the project, download unity from the above link and open the root folder of this repository. 
+            <br>
+            </p>
+
+            <p>The project proposal can be found <a href="https://docs.google.com/document/d/1IrvYPy6X3Js2kLFi-mI5VTEuHAPGQ_yk_zhmp46rmO4/edit?usp=sharing">here </a></p>
+
+
+
+            <p id="p-nonSynced"><b>Data from non color synced sessions: </b></p>
+            <table id ="total-nonSynced">
+                <tr>
+                    <th >Total sessions</th>
+                    <th >Total time</th>
+                    <th >Avg time</th>
+                    <th >Total tries</th>
+                    <th >Avg tries</th>
+                </tr>
+                <tr>
+                    <td id ="non-synced1">0</td>
+                    <td id ="non-synced2">0</td>
+                    <td id ="non-synced3">0</td>
+                    <td id ="non-synced4">0</td>
+                    <td id ="non-synced5">0</td>
+                </tr>
+            </table>
+
+            <p id="p-synced"><b>Data from color synced sessions: </b></p>
+            <table id ="total-synced">
+                                <tr>
+                    <th >Total sessions</th>
+                    <th >Total time</th>
+                    <th >Avg time</th>
+                    <th >Total tries</th>
+                    <th >Avg tries</th>
+                </tr>
+                <tr>
+                    <td id ="synced1">0</td>
+                    <td id ="synced2">0</td>
+                    <td id ="synced3">0</td>
+                    <td id ="synced4">0</td>
+                    <td id ="synced5">0</td>
+                </tr>
+            </table>
+
+
+                <button id="button-nonSynced"> View </button>
+                            <b>Full data from non color synced sessions:</b>
+                <table id="table-nonSynced" class="dataTable"></table>
+
+            <br>
+
+
+                <button id="button-synced">View</button>
+                            <b>Full data from color synced sessions:</b>
+                <table id="table-synced" class="dataTable"></table>
+
+
+            <script>
+                $('#table-nonSynced').hide();
+                $(document).ready(function () {
+                    $("#button-nonSynced").click(function () {
+                        $("#table-nonSynced").toggle();
+                    });
+                });
+            </script>
+
+            <script>
+                $('#table-synced').hide();
+                $(document).ready(function () {
+                    $("#button-synced").click(function () {
+                        $("#table-synced").toggle();
+                    });
+                });
+            </script>
+
+            </section>
+    
+
+            <script> 
+        <!-- This section will fetch data from the open database hosted on firebase >
+
+    var nonSyncedRef = new Firebase("https://blazing-inferno-8421.firebaseio.com/sessions/NonColorSyncedSessions");
+    var syncedRef = new Firebase("https://blazing-inferno-8421.firebaseio.com/sessions/colorSyncedSessions");
+
+    var tableNonSynced = $("#table-nonSynced");
+    var tableSynced = $("#table-synced");
+    var totalNonSynced = $("#total-nonSynced");
+    var totalSynced = $("#total-synced");
+
+
+    tableNonSynced.append("<tr class='header'> <th> time </th> <th> tries </th> </tr>");
+    tableSynced.append("<tr class='header'> <th> time </th> <th> tries </th> </tr>");
+
+    nonSyncedRef.orderByChild("time").on("child_added", function (snapshot) {
+
+        $("#non-synced1").text((parseFloat($("#non-synced1").text()) + 1));
+        $("#non-synced2").text((parseFloat($("#non-synced2").text()) + parseFloat(snapshot.val().time)).toFixed(1));
+        $("#non-synced3").text((parseFloat($("#non-synced2").text()) / parseFloat($("#non-synced1").text())).toFixed(1));
+        $("#non-synced4").text((parseFloat($("#non-synced4").text()) + parseFloat(snapshot.val().tries)).toFixed(1));
+        $("#non-synced5").text((parseFloat($("#non-synced4").text()) / parseFloat($("#non-synced1").text())).toFixed(1));
+
+
+        console.log("time: " + snapshot.val().time + ", " + "tries: " + snapshot.val().tries);
+        tableNonSynced.append("<tr> <td> " + snapshot.val().time + " </td> <td> " + snapshot.val().tries + " </td> </tr>");
+
+
+    }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code)
+    });
+
+    syncedRef.orderByChild("time").on("child_added", function (snapshot) {
+
+
+        $("#synced1").text((parseFloat($("#synced1").text()) + 1));
+        $("#synced2").text((parseFloat($("#synced2").text()) + parseFloat(snapshot.val().time)).toFixed(1));
+        $("#synced3").text((parseFloat($("#synced2").text()) / parseFloat($("#synced1").text())).toFixed(1));
+        $("#synced4").text((parseFloat($("#synced4").text()) + parseFloat(snapshot.val().tries)).toFixed(1));
+        $("#synced5").text((parseFloat($("#synced4").text()) / parseFloat($("#synced1").text())).toFixed(1));
+
+        console.log("time: " + snapshot.val().time + ", " + "tries: " + snapshot.val().tries);
+        tableSynced.append("<tr> <td> " + snapshot.val().time + " </td> <td> " + snapshot.val().tries + " </td> </tr>");
+
+    }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code)
+    });
+
+
+
+
+
+
+            </script>
+
+
+
+            <footer>
+                <p>This project is maintained by <a href="https://github.com/modstam">modstam</a></p>
+                <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+            </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+
+</body>
+</html>
