@@ -1,7 +1,7 @@
 
 .card{
-	width: 67px;
-	height: 100px;
+	width: 100px;
+	height: 150px;
 	color:transparent;
 	text-align: center;
 	background-image: url("../Img/cardback.jpg");
@@ -11,12 +11,12 @@
 }
 
 .card:hover {
-	background-image: url("cardhighlighted.png");
+	background-image: url("");
 }
 
 .show{
-	width: 67px;
-	height: 100px;
+	width: 100px;
+	height: 150px;
 	background: #fff;
 	color:black;
 }
